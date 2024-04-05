@@ -15,31 +15,47 @@ REST API для проекта Yatube.
 ## Установка
 Клонировать репозиторий:
 
-```git clone https://github.com/timur-nagimov/api_final_yatube```
+```bash
+git clone https://github.com/timur-nagimov/api_final_yatube
+```
 
 Перейти в папку с проектом:
 
-```cd api_final_yatube```
+```bash
+cd api_final_yatube
+```
 
 Создание/актиавация виртуального окружения
 
-```py -m venv venv```
+```bash
+py -m venv venv
+```
   
-```source venv/Scripts/activate```
+```bash
+source venv/Scripts/activate
+```
 
 Установить зависимости из файла requirements.txt:
 
-```python3 -m pip install --upgrade pip```
+```bash
+python3 -m pip install --upgrade pip
+```
 
-```pip install -r requirements.txt```
+```bash
+pip install -r requirements.txt
+```
 
 Выполнить миграции:
 
-```python3 manage.py migrate```
+```bash
+python3 manage.py migrate
+```
 
 Запустить проект:
 
-```python3 manage.py runserver```
+```bash
+python3 manage.py runserver
+```
 
 ## Примеры
 api/v1/posts/ - При отправке GET-запроса на эндпоинт
