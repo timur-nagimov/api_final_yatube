@@ -14,28 +14,31 @@ REST API для проекта Yatube.
 * api/v1/jwt/verify/ - Проверка JWT-токена
 ## Установка
 Клонировать репозиторий:
-  git clone https://github.com/timur-nagimov/api_final_yatube
 
-  cd api_final_yatube
+`git clone https://github.com/timur-nagimov/api_final_yatube`
+
+Перейти в папку с проектом:
+
+`cd api_final_yatube`
 
 Создание/актиавация виртуального окружения
 
-  py -m venv venv
+`py -m venv venv`
   
-  source venv/Scripts/activate
+`source venv/Scripts/activate`
 
 Установить зависимости из файла requirements.txt:
 
-  python3 -m pip install --upgrade pip
+`python3 -m pip install --upgrade pip`
 
-  pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 Выполнить миграции:
 
-  python3 manage.py migrate
+`python3 manage.py migrate`
 Запустить проект:
 
-  python3 manage.py runserver
+`python3 manage.py runserver`
 
 ## Примеры
 api/v1/posts/ - При отправке GET-запроса на эндпоинт
