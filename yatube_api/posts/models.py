@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models import F, CheckConstraint
 
 User = get_user_model()
 
@@ -69,3 +70,11 @@ class Follow(models.Model):
         related_name='following',
         verbose_name='Подписка'
     )
+
+    class Meta:
+        constraints = (
+            CheckConstraint(
+                check=~models.Q(user=F('following')),
+                name='user_cannot_follow_self'
+            ),
+        )

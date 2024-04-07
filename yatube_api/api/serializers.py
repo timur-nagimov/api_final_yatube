@@ -17,17 +17,14 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    id = serializers.PrimaryKeyRelatedField(read_only=True)
     author = serializers.SlugRelatedField(
         read_only=True, slug_field='username'
     )
-    text = serializers.CharField()
-    created = serializers.StringRelatedField(read_only=True)
-    post = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
-        fields = ('id', 'author', 'text', 'created', 'post',)
+        fields = '__all__'
         model = Comment
+        read_only_fields = ('id', 'created', 'post')
 
 
 class GroupSerializer(serializers.ModelSerializer):
@@ -38,20 +35,21 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class FollowSerializer(serializers.ModelSerializer):
-    user = serializers.StringRelatedField(read_only=True)
+    user = serializers.SlugRelatedField(
+        slug_field='username',
+        read_only=True,
+    )
     following = serializers.SlugRelatedField(
         slug_field='username',
         queryset=User.objects.all(),
-        read_only=False
     )
 
     class Meta:
         model = Follow
         fields = ('user', 'following',)
 
-    def validate(self, data):
+    def validate_following(self, following):
         user = self.context['request'].user
-        following = data.get('following')
 
         if user == following:
             raise serializers.ValidationError(
@@ -59,4 +57,4 @@ class FollowSerializer(serializers.ModelSerializer):
         if Follow.objects.filter(user=user, following=following).exists():
             raise serializers.ValidationError(
                 'Вы уже подписаны на этого пользователя.')
-        return data
+        return following
